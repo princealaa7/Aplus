@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "716867452897",
+    "firebase_url": "https://essaybot-ed916-default-rtdb.firebaseio.com",
+    "project_id": "essaybot-ed916",
+    "storage_bucket": "essaybot-ed916.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716867452897:android:a1def66043fffe78acdca0",
+        "android_client_info": {
+          "package_name": "com.princealaa7.aplus"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZm0XGY7T5jX-2Zn2hjJ_ZOb8sRBeLMYI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

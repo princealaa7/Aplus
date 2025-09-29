@@ -1,0 +1,68 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "essaybot-ed916",
+          "appId": "1:716867452897:android:a1def66043fffe78acdca0",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "essaybot-ed916",
+          "configurations": {
+            "android": "1:716867452897:android:a1def66043fffe78acdca0",
+            "ios": "1:716867452897:ios:aae20444ad0b5e18acdca0",
+            "macos": "1:716867452897:ios:aae20444ad0b5e18acdca0",
+            "web": "1:716867452897:web:d33d2cd2cc19d208acdca0",
+            "windows": "1:716867452897:web:2568185de5de93e1acdca0"
+          }
+        }
+      }
+    }
+  },
+  "functions": [
+    {
+      "codebase": "default",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ],
+      "predeploy": [
+        "npm --prefix \"$RESOURCE_DIR\" run lint"
+      ],
+      "source": "functions",
+      "runtime": "nodejs20"
+    },
+    {
+      "source": "alaa",
+      "codebase": "alaa",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ],
+      "predeploy": []
+    }
+  ],
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
