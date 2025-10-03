@@ -1,10 +1,10 @@
-name: Build iOS (Simulator, no signing)
+name: Build & Upload iOS to TestFlight
 
 on:
-  workflow_dispatch:  # تشغيل يدوي
+  workflow_dispatch: # تشغيل يدوي
 
 jobs:
-  ios-sim-build:
+  build:
     runs-on: macos-14
 
     steps:
@@ -21,40 +21,16 @@ jobs:
         with:
           channel: stable
 
-      - name: Show versions
-        run: |
-          flutter --version
-          xcodebuild -version
-          pod --version || true
-
-      - name: Flutter pub get
+      - name: Install dependencies
         run: flutter pub get
 
-      - name: CocoaPods (clean & install)
-        run: |
-          cd ios
-          pod repo update
-          pod deintegrate || true
-          rm -rf Pods Podfile.lock
-          pod install --repo-update
-          cd ..
+      - name: Build IPA
+        run: flutter build ipa --release
 
-      - name: Build iOS (Simulator, verbose)
-        run: flutter build ios --debug --simulator -v
-
-      - name: Collect .app
-        run: |
-          mkdir -p artifacts
-          APP=$(find build/ios/iphonesimulator -maxdepth 3 -name "*.app" | head -n 1)
-          if [ -z "$APP" ]; then
-            echo "No .app found"; exit 1
-          fi
-          cd "$(dirname "$APP")"
-          zip -r ../../../../artifacts/ios-simulator-app.zip "$(basename "$APP")"
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
+      - name: Upload to TestFlight
+        uses: apple-actions/upload-testflight@v2
         with:
-          name: ios-simulator-app
-          path: artifacts/ios-simulator-app.zip
-          if-no-files-found: error
+          app-path: build/ios/ipa/*.ipa
+          issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
+          api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
+          api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
