@@ -1,7 +1,7 @@
 name: Build & Upload iOS to TestFlight
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: # تشغيل يدوي
 
 jobs:
   build:
@@ -26,6 +26,11 @@ jobs:
 
       - name: Build IPA
         run: flutter build ipa --release
+
+      # إنشاء ملف المفتاح AuthKey.p8 من الـ Secret
+      - name: Create AuthKey file
+        run: |
+          echo "${{ secrets.APPSTORE_PRIVATE_KEY }}" > AuthKey.p8
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
