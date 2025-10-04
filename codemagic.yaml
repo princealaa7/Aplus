@@ -5,10 +5,6 @@ workflows:
       flutter: stable
       xcode: latest
       cocoapods: default
-      vars:
-        APP_STORE_ISSUER_ID: $APPSTORE_ISSUER_ID
-        APP_STORE_KEY_ID: $APPSTORE_KEY_ID
-        APP_STORE_PRIVATE_KEY: $APPSTORE_PRIVATE_KEY
 
     scripts:
       - name: Install dependencies
@@ -24,8 +20,8 @@ workflows:
 
     publishing:
       app_store_connect:
-        issuer_id: $APP_STORE_ISSUER_ID
-        key_id: $APP_STORE_KEY_ID
-        private_key: $APP_STORE_PRIVATE_KEY
+        issuer_id: $APPSTORE_ISSUER_ID
+        key_id: $APPSTORE_KEY_ID
+        private_key: $APPSTORE_PRIVATE_KEY
         submit_to_app_store: true
         submit_to_testflight: false
