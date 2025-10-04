@@ -29,16 +29,22 @@
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 
-	<!-- الاتجاه العمودي فقط للآيفون -->
+	<!-- الاتجاهات المسموحة على الآيفون -->
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 
-	<!-- الاتجاه العمودي فقط للآيباد -->
+	<!-- الاتجاهات المسموحة على الآيباد (مطلوبة من Apple) -->
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 
 	<key>CADisableMinimumFrameDurationOnPhone</key>
@@ -46,7 +52,7 @@
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 
-	<!-- هذا السطر يخلي التطبيق يشتغل على iPhone و iPad -->
+	<!-- دعم الأجهزة (iPhone + iPad) -->
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>
