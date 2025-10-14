@@ -56,7 +56,7 @@ class DefaultFirebaseOptions {
     projectId: 'essaybot-ed916',
     databaseURL: 'https://essaybot-ed916-default-rtdb.firebaseio.com',
     storageBucket: 'essaybot-ed916.firebasestorage.app',
-    iosBundleId: 'com.example.a8',
+    iosBundleId: 'com.princealaa7.aplus',  // تم التصحيح هنا
   );
 
   static const FirebaseOptions web = FirebaseOptions(
@@ -77,7 +77,7 @@ class DefaultFirebaseOptions {
     projectId: 'essaybot-ed916',
     databaseURL: 'https://essaybot-ed916-default-rtdb.firebaseio.com',
     storageBucket: 'essaybot-ed916.firebasestorage.app',
-    iosBundleId: 'com.example.a8',
+    iosBundleId: 'com.princealaa7.aplus',  // تم التصحيح هنا
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
@@ -90,5 +90,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'essaybot-ed916.firebasestorage.app',
     measurementId: 'G-6MYBTP0W7V',
   );
-
 }
