@@ -29,6 +29,18 @@
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 
+	<!-- أذونات الصور -->
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>لاختيار صورة للملف الشخصي</string>
+	<key>NSCameraUsageDescription</key>
+	<string>لالتقاط صورة للملف الشخصي</string>
+
+	<!-- أذونات الإشعارات -->
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
+
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
