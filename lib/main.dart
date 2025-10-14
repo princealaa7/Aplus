@@ -2396,6 +2396,19 @@ Future<int> getChapterScore(int chapter) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  
+  // تهيئة Firebase أولاً
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  
+  // تهيئة App Check لكل المنصات
+  await FirebaseAppCheck.instance.activate(
+    androidProvider: AndroidProvider.playIntegrity,
+    appleProvider: AppleProvider.appAttest, // أضف هذا السطر
+  );
+
+  // ثم باقي الإعدادات
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     systemNavigationBarColor: Colors.transparent,
@@ -2403,13 +2416,6 @@ void main() async {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky,
       overlays: []);
 
-  // تهيئة Firebase
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  await FirebaseAppCheck.instance.activate(
-    androidProvider: AndroidProvider.playIntegrity,
-  );
   // طلب صلاحيات الإشعارات من المستخدم
   await FirebaseMessaging.instance.requestPermission();
 
