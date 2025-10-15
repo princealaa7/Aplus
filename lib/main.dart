@@ -20,6 +20,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'dart:io'; // يتيح لك التعامل مع ملفات النظام
 import 'package:image_picker/image_picker.dart'; // المكتبة التي أضفتها في الخطوة السابقة
+import 'package:a9/firebase_options.dart'; // تأكد من وجود هذا الاستيراد 
+import 'package:flutter/widgets.dart'; // تأكد من استيراد Widgets
 
 // ===== شاشة بوابة المصادقة الجديدة =====
 
