@@ -8,7 +8,12 @@ import Firebase
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
-    FirebaseApp.configure()
+    
+    // تهيئة Firebase أولاً
+    if FirebaseApp.app() == nil {
+        FirebaseApp.configure()
+    }
+    
     GeneratedPluginRegistrant.register(with: self)
     
     // إعداد الإشعارات
