@@ -9,9 +9,12 @@ import Firebase
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
     
-    // تهيئة Firebase أولاً
+    // التحقق من عدم تهيئة Firebase مسبقاً
     if FirebaseApp.app() == nil {
         FirebaseApp.configure()
+        print("✅ Firebase configured successfully")
+    } else {
+        print("ℹ️ Firebase already configured")
     }
     
     GeneratedPluginRegistrant.register(with: self)
