@@ -58,5 +58,26 @@
 	<array>
 		<integer>1</integer>
 	</array>
+
+	<!-- 🔥 الإضافات الجديدة لحل مشكلة Firebase -->
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>لتحديد موقعك</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>لتسجيل الصوت</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>لحفظ الصور في المعرض</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
+	
+	<!-- إعدادات الخصوصية الإضافية -->
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	
+	<!-- إعدادات Firebase -->
+	<key>FirebaseScreenReportingEnabled</key>
+	<false/>
 </dict>
 </plist>
