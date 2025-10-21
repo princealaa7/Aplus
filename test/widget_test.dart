@@ -1,18 +1,29 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
+// هذا هو الكود الصحيح الذي يجب أن يكون في ملف test/widget_test.dart
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:a9/main.dart'; 
+// يجب إضافة هذه الحزم لتشغيل Firebase في الاختبارات:
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core_platform_interface/firebase_core_platform_interface.dart'; 
+import 'package:firebase_core_testing/firebase_core_testing.dart'; 
 
-import 'package:a9/main.dart';
+// دالة لتهيئة Firebase لبيئة الاختبار
+void setupFirebaseTests() {
+  // يضمن تهيئة Flutter قبل البدء
+  TestWidgetsFlutterBinding.ensureInitialized();
+  
+  // يقوم بمحاكاة تهيئة Firebase لتجاوز خطأ [core/no-app]
+  setupFirebaseCoreMocks(); 
+}
 
 void main() {
+  // 1. استدعاء تهيئة Firebase قبل بدء أي اختبار
+  setupFirebaseTests();
+  
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
+    // بعد التهيئة، لن ينهار الكود بسبب Firebase
     await tester.pumpWidget(const MyApp());
 
     // Verify that our counter starts at 0.
