@@ -1,35 +1,27 @@
-// هذا هو الكود الصحيح لملف test/widget_test.dart
-// يحل مشكلة الـ mocking لـ Firebase بآلية القنوات الأساسية
+// هذا هو الكود النهائي لملف test/widget_test.dart
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; // يجب استيراد هذه الحزمة
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:a9/main.dart'; 
+// يجب استيراد هذه الحزمة لتوفير دالة setupFirebaseCoreMocks
+import 'package:firebase_core_testing/firebase_core_testing.dart'; 
+
 
 void main() {
-  // 1. تهيئة بيئة الاختبار والتأكد من تفعيلها
-  TestWidgetsFlutterBinding.ensureInitialized();
+  // 1. استخدام setupAll لتهيئة Firebase مرة واحدة قبل بدء جميع الاختبارات
+  setUpAll(() async {
+    // يضمن تهيئة Flutter قبل البدء
+    TestWidgetsFlutterBinding.ensureInitialized();
+    
+    // يقوم بمحاكاة تهيئة Firebase لجميع الخدمات (Core, Auth, إلخ)
+    // هذا هو الخط الذي يحل المشكلة جذريًا:
+    setupFirebaseCoreMocks(); 
+  });
   
-  // 2. إعداد قناة Mock لـ Firebase Core
-  const MethodChannel channel = MethodChannel('plugins.flutter.io/firebase_core');
-  
-  // 3. اعتراض جميع استدعاءات Firebase ومنع الانهيار
-  // هذا هو الجزء الذي يحل مشكلة الـ mocking:
-  TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
-    channel, 
-    (MethodCall methodCall) async {
-      // محاكاة نتيجة التهيئة الأساسية لـ Firebase
-      if (methodCall.method == 'Firebase#initializeCore') {
-        return <Map<String, dynamic>>[]; // إرجاع قائمة فارغة يعني نجاح التهيئة الوهمية
-      }
-      return null;
-    }
-  );
-
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    // بعد التهيئة الوهمية، يجب أن ينجح هذا السطر الآن
+    // لن ينهار هنا بسبب Firebase بعد الآن.
     await tester.pumpWidget(const MyApp());
 
     // Verify that our counter starts at 0.
