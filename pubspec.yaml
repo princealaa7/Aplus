@@ -10,19 +10,23 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  
+  # إصدارات متوافقة من Firebase
   firebase_core: ^2.24.0
   firebase_database: ^10.3.4
-  youtube_player_flutter: ^9.1.3
+  firebase_auth: ^4.13.1
+  firebase_messaging: ^14.7.0
+  firebase_app_check: ^0.1.1
+  
+  # باقي المكتبات بإصدارات متوافقة
+  youtube_player_flutter: ^9.1.2
   shared_preferences: ^2.2.2
   cupertino_icons: ^1.0.2
-  flutter_local_notifications: ^19.5.0
+  flutter_local_notifications: ^19.4.1
   http: ^1.1.0
-  firebase_messaging: ^14.7.4
   url_launcher: ^6.2.2
-  firebase_auth: ^4.18.2
   image_picker: ^1.1.1
   uuid: ^4.2.1
-  firebase_app_check: ^0.1.1+1
   intl: ^0.18.1
 
 dev_dependencies:
