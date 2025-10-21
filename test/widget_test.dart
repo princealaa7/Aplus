@@ -1,15 +1,28 @@
-// هذا هو الكود الصحيح لملف test/widget_test.dart
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:a9/main.dart'; 
-// يجب استيراد هذه الحزمة لتجاوز مشكلة تهيئة Firebase في الاختبار
-import 'package:firebase_core_platform_interface/firebase_core_platform_interface.dart'; 
+// هذا هو الكود الصحيح والأكثر أمانًا لملف test/widget_test.dart
 
-// دالة محاكاة التهيئة التي تحل خطأ [core/no-app]
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // يجب استيراد هذه الحزمة
+import 'package:flutter_test/flutter_test.dart';
+
+import 'package:a9/main.dart'; 
+// لا نحتاج إلى استيراد حزم firebase_core_... المعقدة هنا بعد الآن!
+
+// دالة محاكاة التهيئة التي تستخدم الخدمات الأساسية (الأكثر موثوقية)
 void setupMockFirebase() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  // إخفاء التحذيرات الخاصة بالقنوات غير المهيأة
-  MethodChannelFirebase.verify();
+  
+  // قم بإعداد قناة الخدمات لمنع الانهيار بسبب Firebase.initializeApp()
+  const MethodChannel channel = MethodChannel('plugins.flutter.io/firebase_core');
+
+  // هذه الدالة تتجاهل أي محاولة لاستدعاء Firebase قبل التهيئة
+  tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(channel, 
+    (MethodCall methodCall) async {
+      if (methodCall.method == 'Firebase#initializeCore') {
+        return [{'name': 'default', 'options': {}}];
+      }
+      return null;
+    }
+  );
 }
 
 void main() {
