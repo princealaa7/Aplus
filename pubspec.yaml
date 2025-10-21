@@ -29,7 +29,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   firebase_core_platform_interface: any 
-  firebase_core_testing: ^0.0.1+1
 
 
 flutter:
