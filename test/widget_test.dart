@@ -1,29 +1,24 @@
-// هذا هو الكود الصحيح الذي يجب أن يكون في ملف test/widget_test.dart
-
+// هذا هو الكود الصحيح لملف test/widget_test.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:a9/main.dart'; 
-// يجب إضافة هذه الحزم لتشغيل Firebase في الاختبارات:
-import 'package:firebase_core/firebase_core.dart';
+// يجب استيراد هذه الحزمة لتجاوز مشكلة تهيئة Firebase في الاختبار
 import 'package:firebase_core_platform_interface/firebase_core_platform_interface.dart'; 
-import 'package:firebase_core_testing/firebase_core_testing.dart'; 
 
-// دالة لتهيئة Firebase لبيئة الاختبار
-void setupFirebaseTests() {
-  // يضمن تهيئة Flutter قبل البدء
+// دالة محاكاة التهيئة التي تحل خطأ [core/no-app]
+void setupMockFirebase() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  
-  // يقوم بمحاكاة تهيئة Firebase لتجاوز خطأ [core/no-app]
-  setupFirebaseCoreMocks(); 
+  // إخفاء التحذيرات الخاصة بالقنوات غير المهيأة
+  MethodChannelFirebase.verify();
 }
 
 void main() {
-  // 1. استدعاء تهيئة Firebase قبل بدء أي اختبار
-  setupFirebaseTests();
+  // 1. استدعاء دالة التهيئة قبل بدء أي اختبار
+  setupMockFirebase();
   
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    // بعد التهيئة، لن ينهار الكود بسبب Firebase
+    // لن ينهار هنا بسبب Firebase بعد الآن.
     await tester.pumpWidget(const MyApp());
 
     // Verify that our counter starts at 0.
