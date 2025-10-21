@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:aplus/main.dart';
+import 'package:a9/main.dart';
 
 void main() {
   test('Basic app test - always passes', () {
