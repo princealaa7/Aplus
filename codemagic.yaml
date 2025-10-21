@@ -3,7 +3,7 @@ workflows:
     name: iOS App Store Release
     environment:
       groups:
-        - app_store_credentials  # أضف هذه المجموعة
+        - app_store_credentials
       vars:
         XCODE_WORKSPACE: "Runner.xcworkspace"
         XCODE_SCHEME: "Runner"
@@ -42,3 +42,6 @@ workflows:
         key_id: $APPSTORE_KEY_ID
         issuer_id: $APPSTORE_ISSUER_ID
         submit_to_app_store: true
+      email:
+        recipients:
+          - princealaa777@gmail.com  # ضع بريدك هنا
