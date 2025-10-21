@@ -9,18 +9,10 @@ import Firebase
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
     
-    // تأخير تهيئة Firebase قليلاً
-    if FirebaseApp.app() == nil {
-        FirebaseApp.configure()
-    }
+    // تهيئة Firebase مباشرة
+    FirebaseApp.configure()
     
     GeneratedPluginRegistrant.register(with: self)
-    
-    // تأخير الإرجاع قليلاً للتأكد من اكتمال التهيئة
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-        // أي إعدادات إضافية
-    }
-    
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }
