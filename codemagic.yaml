@@ -2,18 +2,36 @@ workflows:
   ios-app-store:
     name: iOS App Store Release
     environment:
+      groups:
+        - app_store_credentials  # أضف هذه المجموعة
+      vars:
+        XCODE_WORKSPACE: "Runner.xcworkspace"
+        XCODE_SCHEME: "Runner"
+        BUNDLE_ID: "com.princealaa7.aplus"
       flutter: stable
       xcode: latest
       cocoapods: default
 
     scripts:
-      - name: Install dependencies
+      - name: Set up keychain
         script: |
-          flutter clean
+          keychain initialize
+      - name: Fetch signing files
+        script: |
+          app-store-connect fetch-signing-files $BUNDLE_ID --type IOS_APP_STORE --platform IOS --create
+      - name: Set up code signing
+        script: |
+          keychain add-certificates
+      - name: Install pods
+        script: |
+          cd ios && pod install
+      - name: Run Flutter tests
+        script: |
           flutter pub get
-      - name: Build iOS IPA for App Store
+          flutter test
+      - name: Build iOS
         script: |
-          flutter build ipa --release
+          flutter build ipa --release --no-codesign
 
     artifacts:
       - build/ios/ipa/*.ipa
@@ -24,4 +42,3 @@ workflows:
         key_id: $APPSTORE_KEY_ID
         issuer_id: $APPSTORE_ISSUER_ID
         submit_to_app_store: true
-        submit_to_testflight: false
