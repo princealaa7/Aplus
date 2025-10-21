@@ -11,18 +11,18 @@ dependencies:
   flutter:
     sdk: flutter
   
-  # إصدارات Firebase المتوافقة مع بعضها
+  # إصدارات Firebase
   firebase_core: ^2.24.0
   firebase_auth: ^4.13.1
   firebase_database: ^10.3.4
   firebase_messaging: ^14.7.0
-  firebase_app_check: ^0.2.2  # تم الترقية كما اقترح الخطأ
+  firebase_app_check: ^0.2.2
   
-  # مكتبات YouTube والويب المتوافقة
+  # مكتبات YouTube والويب - الإصدارات المتوافقة
   youtube_player_flutter: ^9.1.2
-  web: ^0.5.0  # أضفنا هذه المكتبة لحل التعارض
+  web: ^1.0.0  # غيرنا من 0.5.0 إلى 1.0.0 كما قال الخطأ
   
-  # باقي المكتبات الأساسية
+  # باقي المكتبات
   shared_preferences: ^2.2.2
   cupertino_icons: ^1.0.2
   flutter_local_notifications: ^19.4.1
