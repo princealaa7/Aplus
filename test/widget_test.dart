@@ -1,37 +1,35 @@
-// هذا هو الكود الصحيح والأكثر أمانًا لملف test/widget_test.dart
+// هذا هو الكود الصحيح لملف test/widget_test.dart
+// يحل مشكلة الـ mocking لـ Firebase بآلية القنوات الأساسية
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'; // يجب استيراد هذه الحزمة
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:a9/main.dart'; 
-// لا نحتاج إلى استيراد حزم firebase_core_... المعقدة هنا بعد الآن!
 
-// دالة محاكاة التهيئة التي تستخدم الخدمات الأساسية (الأكثر موثوقية)
-void setupMockFirebase() {
+void main() {
+  // 1. تهيئة بيئة الاختبار والتأكد من تفعيلها
   TestWidgetsFlutterBinding.ensureInitialized();
   
-  // قم بإعداد قناة الخدمات لمنع الانهيار بسبب Firebase.initializeApp()
+  // 2. إعداد قناة Mock لـ Firebase Core
   const MethodChannel channel = MethodChannel('plugins.flutter.io/firebase_core');
-
-  // هذه الدالة تتجاهل أي محاولة لاستدعاء Firebase قبل التهيئة
-  tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(channel, 
+  
+  // 3. اعتراض جميع استدعاءات Firebase ومنع الانهيار
+  // هذا هو الجزء الذي يحل مشكلة الـ mocking:
+  TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
+    channel, 
     (MethodCall methodCall) async {
+      // محاكاة نتيجة التهيئة الأساسية لـ Firebase
       if (methodCall.method == 'Firebase#initializeCore') {
-        return [{'name': 'default', 'options': {}}];
+        return <Map<String, dynamic>>[]; // إرجاع قائمة فارغة يعني نجاح التهيئة الوهمية
       }
       return null;
     }
   );
-}
 
-void main() {
-  // 1. استدعاء دالة التهيئة قبل بدء أي اختبار
-  setupMockFirebase();
-  
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    // لن ينهار هنا بسبب Firebase بعد الآن.
+    // بعد التهيئة الوهمية، يجب أن ينجح هذا السطر الآن
     await tester.pumpWidget(const MyApp());
 
     // Verify that our counter starts at 0.
