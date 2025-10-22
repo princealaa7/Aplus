@@ -35,13 +35,19 @@ workflows:
 
     artifacts:
       - build/ios/ipa/*.ipa
+      - build/ios/archive/*.xcarchive  # ⬅️ أضفنا هذا السطر
 
     publishing:
       app_store_connect:
         api_key: $APPSTORE_PRIVATE_KEY
         key_id: $APPSTORE_KEY_ID
         issuer_id: $APPSTORE_ISSUER_ID
-        submit_to_app_store: true
+        submit_to_app_store: false  # ⬅️ غيرنا إلى false
+      
+      # ⬅️ أضفنا هذا القسم كاملاً
+      app_preview:
+        enabled: true
+        
       email:
         recipients:
-          - princealaa777@gmail.com  # ضع بريدك هنا
+          - princealaa777@gmail.com
