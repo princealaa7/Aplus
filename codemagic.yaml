@@ -6,16 +6,12 @@ workflows:
       xcode: latest
 
     scripts:
-      - name: Install dependencies
+      - name: Build iOS Simulator App
         script: |
-          flutter pub get
-      - name: Build for App Preview
-        script: |
-          flutter build ios --debug --simulator
-
+          flutter build ios --simulator --debug
+          
     artifacts:
       - build/ios/iphonesimulator/Runner.app
-      - build/ios/iphonesimulator/Runner.app.dSYM
 
     publishing:
       app_preview:
