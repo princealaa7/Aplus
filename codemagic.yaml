@@ -1,6 +1,6 @@
 workflows:
-  ios-app-store:
-    name: iOS App Store Release
+  app-preview-workflow:
+    name: App Preview with Quick Launch
     environment:
       groups:
         - app_store_credentials
@@ -21,18 +21,12 @@ workflows:
       - name: Set up code signing
         script: |
           keychain add-certificates
-      - name: Install pods
-        script: |
-          cd ios && pod install
       - name: Pre-build script
         script: |
-          echo "Running pre-build script..."
           flutter pub get
           flutter clean
-          cd ios
-          pod install
-          cd ..
-      - name: Build iOS
+          cd ios && pod install && cd ..
+      - name: Build iOS App Preview
         script: |
           flutter build ipa --release --no-codesign
 
@@ -44,4 +38,8 @@ workflows:
         api_key: $APPSTORE_PRIVATE_KEY
         key_id: $APPSTORE_KEY_ID
         issuer_id: $APPSTORE_ISSUER_ID
-        submit_to_app_store: false
+        submit_to_app_store: true
+        submit_to_testflight: true  # أضف هذا السطر
+      email:
+        recipients:
+          - princealaa777@gmail.com
