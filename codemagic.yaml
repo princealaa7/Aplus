@@ -24,9 +24,16 @@ workflows:
       - name: Install pods
         script: |
           cd ios && pod install
+      - name: Pre-build script
+        script: |
+          echo "Running pre-build script..."
+          flutter pub get
+          flutter clean
+          cd ios
+          pod install
+          cd ..
       - name: Build iOS
         script: |
-          flutter pub get
           flutter build ipa --release --no-codesign
 
     artifacts:
